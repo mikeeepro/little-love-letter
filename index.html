@@ -1,106 +1,608 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#fff8fb">
-<title>A small, honest note</title>
+<title>A Little Secret 💌</title>
+
 <style>
-:root{--pink:#ff4f91;--deep:#a51e58;--cream:#fff8fb;--ink:#54243b;--muted:#8b6678}
-*{box-sizing:border-box}
-body{margin:0;min-height:100vh;color:var(--ink);font-family:Georgia,"Times New Roman",serif;background:radial-gradient(circle at 20% 10%,#ffe4f0,transparent 35%),radial-gradient(circle at 90% 80%,#ffd0e5,transparent 35%),linear-gradient(135deg,#fff8fb,#ffeaf4);overflow-x:hidden}
-button{font:inherit}
-main{width:min(680px,92%);margin:0 auto;min-height:100vh;display:grid;place-items:center;padding:30px 0;position:relative;z-index:1}
-.card{width:100%;background:#ffffffdf;border:1px solid #ffffff;box-shadow:0 24px 80px #b53d7130;border-radius:28px;padding:clamp(24px,6vw,48px);text-align:center;backdrop-filter:blur(12px);overflow:hidden}
-.eyebrow{font:700 11px/1.5 system-ui;letter-spacing:2.5px;text-transform:uppercase;color:#bd4b7c}
-h1{font-size:clamp(34px,8vw,56px);line-height:1.07;margin:14px 0;color:#8f2453}
-p{font-size:clamp(17px,4vw,19px);line-height:1.75}
-.intro{max-width:490px;margin:0 auto 24px}
-.badge{width:78px;height:78px;margin:24px auto 16px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,#fff,#ffe0ed);border:1px solid #f8c9dc;box-shadow:0 12px 30px #b53d711c;font-size:35px}
-.btn{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;border:0;border-radius:999px;padding:14px 22px;background:linear-gradient(135deg,#ff5b9d,#d52d75);color:white;font:700 14px system-ui;cursor:pointer;box-shadow:0 10px 25px #e83f873b;transition:transform .2s,filter .2s;margin:7px}
-.btn:hover{transform:translateY(-2px);filter:brightness(1.04)}
-.btn.secondary{background:#fff;color:#a12b60;border:1px solid #f4c2d8;box-shadow:none}
-.screen{display:none;animation:fade .5s ease}.screen.active{display:block}
-.small{font:13px/1.7 system-ui;color:var(--muted);margin:20px auto 0;max-width:500px}
-.divider{width:64px;height:2px;background:#f4b6d2;margin:23px auto}
-.note{background:#fffafc;border:1px solid #f8d4e5;border-radius:18px;padding:20px 22px;text-align:left;margin:20px 0}
-.note p{font-size:17px;margin:0 0 14px}.note p:last-child{margin-bottom:0}
-.suggestions{display:grid;gap:10px;margin:20px 0}
-.suggestion{width:100%;text-align:left;background:#fffafd;border:1px solid #f4c8db;border-radius:15px;padding:15px 17px;color:var(--ink);line-height:1.55;cursor:pointer;transition:.2s}
-.suggestion:hover,.suggestion:focus-visible{border-color:#e77da8;background:#fff4f8;outline:none;transform:translateY(-1px)}
-.suggestion span{display:block;font:11px system-ui;color:#a36c88;letter-spacing:.5px;margin-top:5px}
-#toast{min-height:22px;font:13px/1.5 system-ui;color:#a12b60;margin:8px 0}
-.float{position:fixed;bottom:-30px;pointer-events:none;opacity:.3;animation:rise linear forwards;color:#f04d91;z-index:0}
-@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-@keyframes rise{to{transform:translateY(-110vh) rotate(25deg);opacity:0}}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --pink: #ff7fa8;
+    --rose: #ffb6c9;
+    --purple: #b9a0ff;
+    --cream: #fff9fc;
+}
+
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+    font-family: 'DM Sans', sans-serif;
+    color: #593b55;
+    background:
+        radial-gradient(circle at 10% 10%, #ffe0ed, transparent 40%),
+        radial-gradient(circle at 90% 80%, #e9ddff, transparent 45%),
+        linear-gradient(135deg, #fff8fc, #fff0f7, #f5efff);
+}
+
+button {
+    font-family: inherit;
+    cursor: pointer;
+    border: none;
+}
+
+#particles {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.particle {
+    position: absolute;
+    bottom: -40px;
+    animation: floatUp linear forwards;
+    opacity: .65;
+}
+
+@keyframes floatUp {
+    to {
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+main {
+    position: relative;
+    z-index: 2;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 25px 16px;
+}
+
+.screen {
+    display: none;
+    width: 100%;
+    max-width: 560px;
+    text-align: center;
+    animation: reveal .8s ease;
+}
+
+.screen.active {
+    display: block;
+}
+
+@keyframes reveal {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.badge {
+    display: inline-block;
+    padding: 9px 16px;
+    background: rgba(255,255,255,.7);
+    border: 1px solid #ffd6e5;
+    border-radius: 100px;
+    color: #d46d97;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+}
+
+h1, h2 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 500;
+}
+
+h1 {
+    font-size: clamp(38px, 10vw, 65px);
+    line-height: 1.13;
+    margin-bottom: 20px;
+    color: #65415d;
+}
+
+h1 em {
+    color: #ec82a9;
+}
+
+.subtitle {
+    max-width: 420px;
+    margin: 0 auto 30px;
+    font-size: 15px;
+    line-height: 1.9;
+    color: #98768f;
+}
+
+.btn {
+    padding: 15px 26px;
+    border-radius: 100px;
+    font-weight: 600;
+    font-size: 14px;
+    transition: .3s;
+    margin: 6px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #ff8fb5, #d9a2ff);
+    color: white;
+    box-shadow: 0 10px 30px #ed9fc966;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px #ed9fc988;
+}
+
+.btn-light {
+    background: white;
+    color: #c576a0;
+    border: 1px solid #ffe0ec;
+}
+
+.btn-light:hover {
+    transform: translateY(-3px);
+    background: #fff4fa;
+}
+
+.hero {
+    font-size: 100px;
+    margin-bottom: 15px;
+    filter: drop-shadow(0 12px 15px #ffb4cf55);
+    animation: bob 3s ease-in-out infinite;
+}
+
+@keyframes bob {
+    50% { transform: translateY(-10px) rotate(4deg); }
+}
+
+.card {
+    padding: 35px 25px;
+    background: rgba(255,255,255,.68);
+    backdrop-filter: blur(18px);
+    border: 1px solid white;
+    border-radius: 28px;
+    box-shadow: 0 20px 70px #d9a4cc25;
+    margin: 20px 0;
+}
+
+.card p {
+    line-height: 1.95;
+    color: #98768f;
+    font-size: 15px;
+}
+
+.card strong {
+    color: #d777a0;
+}
+
+.letter {
+    font-size: 75px;
+    margin: 20px 0;
+    cursor: pointer;
+    display: inline-block;
+    transition: .5s;
+    filter: drop-shadow(0 10px 10px #ffb6c955);
+}
+
+.letter:hover {
+    transform: rotate(-10deg) scale(1.15);
+}
+
+.secret {
+    display: none;
+    margin-top: 25px;
+    padding: 25px;
+    border-radius: 20px;
+    background: #fff2fa;
+    animation: reveal .7s;
+}
+
+.secret.show {
+    display: block;
+}
+
+.secret p {
+    line-height: 1.9;
+    font-size: 15px;
+    color: #a36e91;
+}
+
+.teddy {
+    font-size: 95px;
+    animation: bob 3s infinite;
+    margin: 20px 0;
+}
+
+.teddy-heart {
+    display: inline-block;
+    animation: heartbeat 1.2s infinite;
+}
+
+@keyframes heartbeat {
+    50% { transform: scale(1.3); }
+}
+
+.progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 4px;
+    background: linear-gradient(90deg, #ff8fb5, #b9a0ff);
+    z-index: 10;
+    transition: width .5s;
+}
+
+.footer {
+    font-size: 12px;
+    color: #c39ab8;
+    margin-top: 35px;
+    letter-spacing: 1px;
+}
+
+.question {
+    font-size: clamp(28px, 7vw, 42px);
+    margin: 20px 0;
+}
+
+#answerMessage {
+    margin-top: 25px;
+    color: #d777a0;
+    font-size: 17px;
+    line-height: 1.8;
+}
+
+.sparkle {
+    display: inline-block;
+    animation: spin 4s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.hidden {
+    display: none !important;
+}
+
+@media(max-width:480px) {
+    .card { padding: 28px 20px; }
+    .hero { font-size: 85px; }
+}
 </style>
 </head>
+
 <body>
+
+<div class="progress" id="progress"></div>
+<div id="particles"></div>
+
 <main>
-<div class="card">
-<section class="screen active" id="s1">
-<div class="eyebrow">A small note from someone who follows your videos</div>
-<div class="badge" aria-hidden="true">💌</div>
-<h1>Hi, you.</h1>
-<p class="intro">This is a little out of the blue, so I’ll keep it honest and brief.</p>
-<button class="btn" onclick="show('s2')">A little context →</button>
-<p class="small">No pressure to continue or reply. I just wanted to say hello respectfully.</p>
+
+<!-- SCREEN 1 -->
+<section class="screen active" id="screen1">
+
+    <div class="hero">🧸</div>
+
+    <div class="badge">a tiny little secret</div>
+
+    <h1>Hey, <em>beautiful.</em></h1>
+
+    <p class="subtitle">
+        I made something for you.<br>
+        Nothing complicated… just something my heart
+        has been wanting to say. 💗
+    </p>
+
+    <button class="btn btn-primary" onclick="nextScreen(2)">
+        Open your little surprise ✨
+    </button>
+
+    <div class="footer">MADE WITH A LITTLE EXTRA COURAGE ♡</div>
 </section>
 
-<section class="screen" id="s2">
-<div class="eyebrow">A little honesty</div>
-<h1>We haven’t met.</h1>
-<div class="divider"></div>
-<div class="note">
-<p>Hi,</p>
-<p>We haven’t talked or met before. I’ve come across your videos on TikTok, and I enjoy the way you share them. You seem interesting, so I wanted to say hello.</p>
-<p>I realize that liking someone from their videos means I only know what you choose to share online—I don’t want to assume we already know each other.</p>
-<p>If you’d ever be comfortable chatting and getting to know each other, I’d be glad to. If not, that’s completely okay; you don’t owe me a reply, and I won’t take it personally.</p>
-<p>— Mike</p>
-</div>
-<button class="btn" onclick="show('s3')">Optional reply ideas →</button>
-<p class="small">If this message feels unexpected or unwelcome, please feel free to ignore it. No follow-up is expected.</p>
+
+<!-- SCREEN 2 -->
+<section class="screen" id="screen2">
+
+    <div class="badge">chapter one · the little secret</div>
+
+    <h1>It started <em>before today.</em></h1>
+
+    <div class="card">
+        <div class="letter" onclick="openLetter()">💌</div>
+
+        <p>
+            Funny how someone can become your favorite
+            thought without even knowing it.
+        </p>
+
+        <p style="margin-top:15px">
+            Tap the letter below.
+            I've been keeping something inside. 🫣
+        </p>
+
+        <button class="btn btn-light" onclick="openLetter()">
+            Unfold the letter 💌
+        </button>
+
+        <div class="secret" id="letter">
+            <p>
+                Okay… here's my little confession. 🥹
+                <br><br>
+                For a while now, whenever I see you,
+                something about you just catches my attention.
+                <br><br>
+                Your beauty, your vibe, the way you carry yourself…
+                honestly, there's something really special about you.
+                <br><br>
+                And the funny part?
+                <strong>I've been crushing on you without
+                even having the courage to say hello.</strong>
+                <br><br>
+                Today was our first conversation,
+                and somehow it made me want to know you
+                even more. 💗
+            </p>
+        </div>
+    </div>
+
+    <button class="btn btn-primary" onclick="nextScreen(3)">
+        There's more… 👀
+    </button>
+
 </section>
 
-<section class="screen" id="s3">
-<div class="eyebrow">Only if you feel like replying</div>
-<div class="badge" aria-hidden="true">💬</div>
-<h1>Your call.</h1>
-<p class="intro">Here are a few possible replies. Tap one to copy it, then use the TikTok button if you’d like to message me. You can also say anything in your own words.</p>
-<div class="suggestions">
-<button class="suggestion" onclick="copyReply(this)">“Hi! Thanks for the kind note 😊”<span>Friendly hello</span></button>
-<button class="suggestion" onclick="copyReply(this)">“Hey, I’d be open to chatting a little.”<span>Open to a conversation</span></button>
-<button class="suggestion" onclick="copyReply(this)">“Thanks for being respectful. I’m not interested, but I wish you well.”<span>Kindly saying no</span></button>
-<button class="suggestion" onclick="copyReply(this)">“I’d rather not chat, but thank you for understanding.”<span>Setting a boundary</span></button>
-</div>
-<div id="toast" aria-live="polite"></div>
-<a class="btn" id="tiktokLink" href="https://www.tiktok.com/" target="_blank" rel="noopener noreferrer">Open TikTok</a>
-<p class="small">This page doesn’t collect or send replies. TikTok doesn’t let this page send a DM on your behalf; the button opens the profile link configured by the page owner, and you choose whether to message. Please replace the TikTok username in the code before sharing.</p>
-<button class="btn secondary" onclick="show('s2')">Back</button>
+
+<!-- SCREEN 3 -->
+<section class="screen" id="screen3">
+
+    <div class="badge">chapter two · a little gift</div>
+
+    <h1>A little <em>something</em> for you.</h1>
+
+    <div class="card">
+
+        <div class="teddy" onclick="hugTeddy()">
+            🧸<span class="teddy-heart">💗</span>
+        </div>
+
+        <h2 style="font-size:26px;margin-bottom:15px">
+            Meet Mr. Cuddle.
+        </h2>
+
+        <p>
+            He has a tiny job…
+            <br>
+            to deliver the smile I hope this gives you.
+        </p>
+
+        <button class="btn btn-light" onclick="hugTeddy()">
+            Give him a hug 🤗
+        </button>
+
+        <p id="teddyMessage" style="margin-top:20px"></p>
+
+    </div>
+
+    <button class="btn btn-primary" onclick="nextScreen(4)">
+        One last thing… 💕
+    </button>
+
 </section>
-</div>
+
+
+<!-- SCREEN 4 -->
+<section class="screen" id="screen4">
+
+    <div class="badge">chapter three · the honest part</div>
+
+    <h1>Can I tell you <em>something?</em></h1>
+
+    <div class="card">
+        <div style="font-size:60px">🌷</div>
+
+        <p>
+            I'm not here to rush anything,
+            or pretend I already know you.
+            <br><br>
+            I just think you're beautiful,
+            and I'd genuinely love the chance
+            to discover the person behind that smile.
+            <br><br>
+            No pressure. No expectations.
+            Just me being honest for once. 🤍
+        </p>
+
+        <p style="margin-top:20px">
+            And if I'm being completely honest…
+            <strong>today's conversation made my day.</strong>
+        </p>
+    </div>
+
+    <button class="btn btn-primary" onclick="nextScreen(5)">
+        Open the final surprise 🎁
+    </button>
+
+</section>
+
+
+<!-- SCREEN 5 -->
+<section class="screen" id="screen5">
+
+    <div class="hero">🌸</div>
+
+    <div class="badge">a little question · just for you</div>
+
+    <h1 class="question">
+        So… would you let me <em>get to know you?</em>
+    </h1>
+
+    <p class="subtitle">
+        Slowly, genuinely, and with a whole lot of smiles? 🥹
+    </p>
+
+    <div class="card">
+
+        <button class="btn btn-primary" onclick="sayYes()">
+            I'd love that 💗
+        </button>
+
+        <button class="btn btn-light" onclick="sayMaybe()">
+            Let's see 😊
+        </button>
+
+        <div id="answerMessage"></div>
+
+    </div>
+
+    <p class="footer">
+        WHATEVER YOUR ANSWER… THANK YOU FOR READING THIS. 🤍
+    </p>
+
+    <button class="btn btn-light" onclick="restart()">
+        Read it again ↻
+    </button>
+
+</section>
+
 </main>
+
+
 <script>
-// Replace this with your TikTok username (without the @) before sharing.
-const TIKTOK_USERNAME='YOUR_TIKTOK_USERNAME';
-const tiktokLink=document.getElementById('tiktokLink');
-if(TIKTOK_USERNAME && TIKTOK_USERNAME!=='YOUR_TIKTOK_USERNAME'){
- tiktokLink.href='https://www.tiktok.com/@'+encodeURIComponent(TIKTOK_USERNAME);
- tiktokLink.textContent='Visit my TikTok profile ↗';
+
+// Floating petals
+const particles = document.getElementById("particles");
+
+function createParticle() {
+    const p = document.createElement("div");
+    p.className = "particle";
+    p.innerHTML = ["♡","🌸","✧","💕","✿"][Math.floor(Math.random()*5)];
+
+    p.style.left = Math.random()*100+"%";
+    p.style.fontSize = (12+Math.random()*18)+"px";
+    p.style.animationDuration = (8+Math.random()*10)+"s";
+
+    particles.appendChild(p);
+
+    setTimeout(()=>p.remove(),18000);
 }
-function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo({top:0,behavior:'smooth'})}
-async function copyReply(button){
- const text=button.childNodes[0].textContent.replace(/[“”]/g,'').trim();
- const toast=document.getElementById('toast');
- try{
-  await navigator.clipboard.writeText(text);
-  toast.textContent='Reply idea copied. If you want, open TikTok and send it in a DM.';
- }catch(error){
-  toast.textContent='You can use this reply idea in a TikTok DM if you’d like.';
- }
+
+setInterval(createParticle,500);
+
+
+// Screen navigation
+function nextScreen(number) {
+    document.querySelectorAll(".screen").forEach(s=>{
+        s.classList.remove("active");
+    });
+
+    document.getElementById("screen"+number).classList.add("active");
+
+    document.getElementById("progress").style.width =
+        ((number-1)/4*100)+"%";
+
+    window.scrollTo({top:0,behavior:"smooth"});
+
+    burst();
 }
-for(let i=0;i<12;i++){let e=document.createElement('span');e.className='float';e.textContent=['♡','✦'][i%2];e.style.left=Math.random()*100+'vw';e.style.animationDuration=(10+Math.random()*9)+'s';e.style.animationDelay=(-Math.random()*15)+'s';e.style.fontSize=(15+Math.random()*20)+'px';document.body.appendChild(e)}
+
+
+// Letter surprise
+function openLetter() {
+    const letter = document.getElementById("letter");
+
+    letter.classList.toggle("show");
+
+    if(letter.classList.contains("show")) {
+        burst();
+    }
+}
+
+
+// Teddy surprise
+function hugTeddy() {
+    const msg = document.getElementById("teddyMessage");
+
+    msg.innerHTML =
+        "🤗 Sending you the biggest virtual hug!<br>" +
+        "Mr. Cuddle says you're absolutely adorable. 💗";
+
+    burst();
+}
+
+
+// Final answers
+function sayYes() {
+    document.getElementById("answerMessage").innerHTML =
+        "🥹💗 YOU JUST MADE THIS GUY VERY HAPPY! " +
+        "<br><br>" +
+        "I promise to make getting to know me " +
+        "a lovely little adventure. 🌷";
+
+    burst();
+    bigBurst();
+}
+
+function sayMaybe() {
+    document.getElementById("answerMessage").innerHTML =
+        "That's perfectly okay. 😊💗 " +
+        "<br><br>" +
+        "I'll take my time, keep being myself, " +
+        "and let things happen naturally. 🌸";
+}
+
+function restart() {
+    nextScreen(1);
+    document.getElementById("progress").style.width="0%";
+}
+
+
+// Sparkle explosion
+function burst() {
+    for(let i=0;i<18;i++){
+        const h=document.createElement("div");
+
+        h.innerHTML=["💗","✨","🌸","💕"][Math.floor(Math.random()*4)];
+
+        h.style.position="fixed";
+        h.style.left=Math.random()*100+"vw";
+        h.style.top=Math.random()*100+"vh";
+        h.style.fontSize="22px";
+        h.style.pointerEvents="none";
+        h.style.zIndex="999";
+        h.style.transition="all 1.5s ease";
+
+        document.body.appendChild(h);
+
+        setTimeout(()=>{
+            h.style.transform="translateY(-100px) scale(0)";
+            h.style.opacity="0";
+        },50);
+
+        setTimeout(()=>h.remove(),1600);
+    }
+}
+
+function bigBurst() {
+    for(let i=0;i<45;i++){
+        setTimeout(burst, i*50);
+    }
+}
+
 </script>
+
 </body>
 </html>
