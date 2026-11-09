@@ -3,103 +3,104 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>A little something for you ❤️</title>
+<meta name="theme-color" content="#fff8fb">
+<title>A small, honest note</title>
 <style>
-:root{--pink:#ff4f91;--deep:#a51e58;--cream:#fff8fb;--ink:#54243b}
+:root{--pink:#ff4f91;--deep:#a51e58;--cream:#fff8fb;--ink:#54243b;--muted:#8b6678}
 *{box-sizing:border-box}
 body{margin:0;min-height:100vh;color:var(--ink);font-family:Georgia,"Times New Roman",serif;background:radial-gradient(circle at 20% 10%,#ffe4f0,transparent 35%),radial-gradient(circle at 90% 80%,#ffd0e5,transparent 35%),linear-gradient(135deg,#fff8fb,#ffeaf4);overflow-x:hidden}
-button,textarea{font:inherit}
-main{width:min(680px,92%);margin:0 auto;min-height:100vh;display:grid;place-items:center;padding:30px 0}
-.card{width:100%;background:#ffffffd9;border:1px solid #ffffff;box-shadow:0 24px 80px #b53d7130;border-radius:28px;padding:clamp(24px,6vw,48px);text-align:center;backdrop-filter:blur(12px);position:relative;overflow:hidden}
-.eyebrow{font:700 11px/1.5 system-ui;letter-spacing:3px;text-transform:uppercase;color:#bd4b7c}
-h1{font-size:clamp(34px,8vw,58px);line-height:1.05;margin:14px 0;color:#8f2453}
-p{font-size:clamp(17px,4vw,20px);line-height:1.75}
-.heart{font-size:48px;display:inline-block;animation:pulse 1.8s infinite}
-.btn{border:0;border-radius:999px;padding:14px 22px;background:linear-gradient(135deg,#ff5b9d,#d52d75);color:white;font:700 14px system-ui;cursor:pointer;box-shadow:0 10px 25px #e83f873b;transition:.2s; margin:7px}
+button{font:inherit}
+main{width:min(680px,92%);margin:0 auto;min-height:100vh;display:grid;place-items:center;padding:30px 0;position:relative;z-index:1}
+.card{width:100%;background:#ffffffdf;border:1px solid #ffffff;box-shadow:0 24px 80px #b53d7130;border-radius:28px;padding:clamp(24px,6vw,48px);text-align:center;backdrop-filter:blur(12px);overflow:hidden}
+.eyebrow{font:700 11px/1.5 system-ui;letter-spacing:2.5px;text-transform:uppercase;color:#bd4b7c}
+h1{font-size:clamp(34px,8vw,56px);line-height:1.07;margin:14px 0;color:#8f2453}
+p{font-size:clamp(17px,4vw,19px);line-height:1.75}
+.intro{max-width:490px;margin:0 auto 24px}
+.badge{width:78px;height:78px;margin:24px auto 16px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,#fff,#ffe0ed);border:1px solid #f8c9dc;box-shadow:0 12px 30px #b53d711c;font-size:35px}
+.btn{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;border:0;border-radius:999px;padding:14px 22px;background:linear-gradient(135deg,#ff5b9d,#d52d75);color:white;font:700 14px system-ui;cursor:pointer;box-shadow:0 10px 25px #e83f873b;transition:transform .2s,filter .2s;margin:7px}
 .btn:hover{transform:translateY(-2px);filter:brightness(1.04)}
 .btn.secondary{background:#fff;color:#a12b60;border:1px solid #f4c2d8;box-shadow:none}
-.screen{display:none;animation:fade .6s ease}
-.screen.active{display:block}
-.small{font:13px system-ui;color:#a36c88;margin-top:22px}
-.divider{width:70px;height:2px;background:#f4b6d2;margin:24px auto}
-.letter{background:#fffafc;border:1px solid #f8d4e5;border-radius:18px;padding:22px;text-align:left}
-.letter p{font-size:18px}
-textarea{width:100%;min-height:110px;border:1px solid #f0bfd5;border-radius:15px;padding:14px;background:#fffafd;color:#54243b;resize:vertical;margin:12px 0}
-.choice{display:flex;flex-wrap:wrap;justify-content:center;margin:18px 0}
-#toast{min-height:25px;font:14px system-ui;color:#a12b60;margin-top:12px}
-.float{position:fixed;bottom:-30px;pointer-events:none;opacity:.35;animation:rise linear forwards;color:#f04d91;z-index:0}
-main{position:relative;z-index:1}
-@keyframes fade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
-@keyframes pulse{50%{transform:scale(1.12)}}
+.screen{display:none;animation:fade .5s ease}.screen.active{display:block}
+.small{font:13px/1.7 system-ui;color:var(--muted);margin:20px auto 0;max-width:500px}
+.divider{width:64px;height:2px;background:#f4b6d2;margin:23px auto}
+.note{background:#fffafc;border:1px solid #f8d4e5;border-radius:18px;padding:20px 22px;text-align:left;margin:20px 0}
+.note p{font-size:17px;margin:0 0 14px}.note p:last-child{margin-bottom:0}
+.suggestions{display:grid;gap:10px;margin:20px 0}
+.suggestion{width:100%;text-align:left;background:#fffafd;border:1px solid #f4c8db;border-radius:15px;padding:15px 17px;color:var(--ink);line-height:1.55;cursor:pointer;transition:.2s}
+.suggestion:hover,.suggestion:focus-visible{border-color:#e77da8;background:#fff4f8;outline:none;transform:translateY(-1px)}
+.suggestion span{display:block;font:11px system-ui;color:#a36c88;letter-spacing:.5px;margin-top:5px}
+#toast{min-height:22px;font:13px/1.5 system-ui;color:#a12b60;margin:8px 0}
+.float{position:fixed;bottom:-30px;pointer-events:none;opacity:.3;animation:rise linear forwards;color:#f04d91;z-index:0}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 @keyframes rise{to{transform:translateY(-110vh) rotate(25deg);opacity:0}}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
 <main>
 <div class="card">
 <section class="screen active" id="s1">
-<div class="eyebrow">A tiny website • a sincere feeling</div>
-<div class="heart">💌</div>
-<h1>Hey, beautiful.</h1>
-<p>I made something small for you.<br>Take a moment and open it when you're ready.</p>
-<button class="btn" onclick="show('s2')">Open my little letter →</button>
-<div class="small">Made with a little courage & a lot of ❤️</div>
+<div class="eyebrow">A small note from someone who follows your videos</div>
+<div class="badge" aria-hidden="true">💌</div>
+<h1>Hi, you.</h1>
+<p class="intro">This is a little out of the blue, so I’ll keep it honest and brief.</p>
+<button class="btn" onclick="show('s2')">A little context →</button>
+<p class="small">No pressure to continue or reply. I just wanted to say hello respectfully.</p>
 </section>
 
 <section class="screen" id="s2">
-<div class="eyebrow">Something I've wanted to say</div>
-<h1>A little honesty…</h1>
+<div class="eyebrow">A little honesty</div>
+<h1>We haven’t met.</h1>
 <div class="divider"></div>
-<div class="letter">
-<p>Hey you,</p>
-<p>I’ve been meaning to tell you this, and I thought a little website would be a fun way to do it. 😊</p>
-<p>Somewhere along the way, I started liking you more than I expected. I like your smile, your energy, and how talking to you can make an ordinary day feel a bit better.</p>
-<p><strong>I have a crush on you. ❤️</strong></p>
-<p>I’m not saying this to pressure you or make things awkward. I just wanted to be honest—and maybe get to know you a little more, if you’d like that too.</p>
-<p>Whatever you feel, your honesty is welcome. You don't owe me a particular answer.</p>
-<p>— Someone who thinks you're pretty special ✨</p>
+<div class="note">
+<p>Hi,</p>
+<p>We haven’t talked or met before. I’ve come across your videos on TikTok, and I enjoy the way you share them. You seem interesting, so I wanted to say hello.</p>
+<p>I realize that liking someone from their videos means I only know what you choose to share online—I don’t want to assume we already know each other.</p>
+<p>If you’d ever be comfortable chatting and getting to know each other, I’d be glad to. If not, that’s completely okay; you don’t owe me a reply, and I won’t take it personally.</p>
+<p>— Mike</p>
 </div>
-<button class="btn" onclick="show('s3')">Your turn 💗</button>
+<button class="btn" onclick="show('s3')">Optional reply ideas →</button>
+<p class="small">If this message feels unexpected or unwelcome, please feel free to ignore it. No follow-up is expected.</p>
 </section>
 
 <section class="screen" id="s3">
-<div class="eyebrow">No pressure, just your honest answer</div>
-<div class="heart">🥹</div>
-<h1>What do you think?</h1>
-<p>Choose whichever feels right—or write your own answer below.</p>
-<div class="choice">
-<button class="btn" onclick="reply('I like you too ❤️')">I like you too ❤️</button>
-<button class="btn secondary" onclick="reply('Aww, that’s really sweet 😊')">Aww, sweet 😊</button>
-<button class="btn secondary" onclick="reply('Let me think about it 💭')">Let me think 💭</button>
+<div class="eyebrow">Only if you feel like replying</div>
+<div class="badge" aria-hidden="true">💬</div>
+<h1>Your call.</h1>
+<p class="intro">Here are a few possible replies. Tap one to copy it, then use the TikTok button if you’d like to message me. You can also say anything in your own words.</p>
+<div class="suggestions">
+<button class="suggestion" onclick="copyReply(this)">“Hi! Thanks for the kind note 😊”<span>Friendly hello</span></button>
+<button class="suggestion" onclick="copyReply(this)">“Hey, I’d be open to chatting a little.”<span>Open to a conversation</span></button>
+<button class="suggestion" onclick="copyReply(this)">“Thanks for being respectful. I’m not interested, but I wish you well.”<span>Kindly saying no</span></button>
+<button class="suggestion" onclick="copyReply(this)">“I’d rather not chat, but thank you for understanding.”<span>Setting a boundary</span></button>
 </div>
-<textarea id="custom" placeholder="Or tell me in your own words…"></textarea>
-<button class="btn" onclick="reply(document.getElementById('custom').value)">Send my answer 💌</button>
-<div id="toast"></div>
-<p class="small">This page doesn't secretly collect anything. To send a reply to me, tap the WhatsApp button below.</p>
-<a id="wa" class="btn secondary" href="#" target="_blank" rel="noopener" style="display:none">Send reply on WhatsApp ↗</a>
+<div id="toast" aria-live="polite"></div>
+<a class="btn" id="tiktokLink" href="https://www.tiktok.com/" target="_blank" rel="noopener noreferrer">Open TikTok</a>
+<p class="small">This page doesn’t collect or send replies. TikTok doesn’t let this page send a DM on your behalf; the button opens the profile link configured by the page owner, and you choose whether to message. Please replace the TikTok username in the code before sharing.</p>
+<button class="btn secondary" onclick="show('s2')">Back</button>
 </section>
 </div>
 </main>
 <script>
-function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo({top:0,behavior:'smooth'})}
-function reply(text){
- text=(text||'').trim();
- if(!text){document.getElementById('toast').textContent='Write a little answer first 💗';return}
- document.getElementById('toast').textContent='Your answer is ready—send it to me below ❤️';
- // Keep the WhatsApp number out of the public code.
- const YOUR_WHATSAPP='';
- const link=document.getElementById('wa');
- if(!YOUR_WHATSAPP){
-   link.style.display='none';
-   link.removeAttribute('href');
-   document.getElementById('toast').textContent='Add your WhatsApp number in the code first, then the reply button will work 💗';
-   return;
- }
- link.href='https://wa.me/'+YOUR_WHATSAPP+'?text='+encodeURIComponent('My reply to your confession: '+text);
- link.style.display='inline-block';
+// Replace this with your TikTok username (without the @) before sharing.
+const TIKTOK_USERNAME='YOUR_TIKTOK_USERNAME';
+const tiktokLink=document.getElementById('tiktokLink');
+if(TIKTOK_USERNAME && TIKTOK_USERNAME!=='YOUR_TIKTOK_USERNAME'){
+ tiktokLink.href='https://www.tiktok.com/@'+encodeURIComponent(TIKTOK_USERNAME);
+ tiktokLink.textContent='Visit my TikTok profile ↗';
 }
-for(let i=0;i<14;i++){let e=document.createElement('span');e.className='float';e.textContent=['♡','♥','✦'][i%3];e.style.left=Math.random()*100+'vw';e.style.animationDuration=(9+Math.random()*9)+'s';e.style.animationDelay=(-Math.random()*15)+'s';e.style.fontSize=(15+Math.random()*22)+'px';document.body.appendChild(e)}
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo({top:0,behavior:'smooth'})}
+async function copyReply(button){
+ const text=button.childNodes[0].textContent.replace(/[“”]/g,'').trim();
+ const toast=document.getElementById('toast');
+ try{
+  await navigator.clipboard.writeText(text);
+  toast.textContent='Reply idea copied. If you want, open TikTok and send it in a DM.';
+ }catch(error){
+  toast.textContent='You can use this reply idea in a TikTok DM if you’d like.';
+ }
+}
+for(let i=0;i<12;i++){let e=document.createElement('span');e.className='float';e.textContent=['♡','✦'][i%2];e.style.left=Math.random()*100+'vw';e.style.animationDuration=(10+Math.random()*9)+'s';e.style.animationDelay=(-Math.random()*15)+'s';e.style.fontSize=(15+Math.random()*20)+'px';document.body.appendChild(e)}
 </script>
 </body>
 </html>
